@@ -1,6 +1,5 @@
 (() => {
   'use strict';
-  document.documentElement.classList.add('js-enabled');
   const qs = (q, el=document) => el.querySelector(q);
   const qsa = (q, el=document) => [...el.querySelectorAll(q)];
   const safeStorage = {
@@ -10,7 +9,6 @@
 
   // INTRO — first view of the session, skips on reduced motion and inner pages.
   const intro = qs('#site-intro');
-  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (intro && document.documentElement.classList.contains('intro-pending')) {
     intro.classList.add('is-active');
     intro.setAttribute('aria-hidden','false');
@@ -25,9 +23,9 @@
       intro.setAttribute('aria-hidden','true');
       document.body.style.overflow='';
       safeStorage.set('sdr-intro-seen','1',true);
-      setTimeout(() => intro.remove(), 800);
+      setTimeout(() => intro.remove(), 550);
     };
-    timer = setTimeout(exit, 2360);
+    timer = setTimeout(exit, 1850);
     qs('[data-intro-skip]',intro)?.addEventListener('click',exit);
     intro.addEventListener('keydown', e => {if(e.key==='Escape'||e.key==='Enter')exit()});
   }else{document.documentElement.classList.remove('intro-pending');intro?.remove()}
@@ -56,15 +54,6 @@
   document.addEventListener('keydown',e=>{if(e.key==='Escape')setMenu(false)});
   window.addEventListener('resize',()=>{if(window.innerWidth>920)setMenu(false)},{passive:true});
   qsa('[data-year]').forEach(e=>e.textContent=new Date().getFullYear());
-
-  // SCROLL REVEAL — respects reduced motion.
-  const reveals=qsa('.reveal');
-  if('IntersectionObserver' in window && !reduced){
-    const io=new IntersectionObserver((entries,observer)=>entries.forEach(ent=>{
-      if(ent.isIntersecting){ent.target.classList.add('is-visible');observer.unobserve(ent.target)}
-    }),{threshold:.11,rootMargin:'0px 0px 30px 0px'});
-    reveals.forEach(el=>io.observe(el));
-  }else reveals.forEach(el=>el.classList.add('is-visible'));
 
   // GALLERY FILTER + KEYBOARD ACCESSIBLE LIGHTBOX.
   const galleryItems=qsa('[data-gallery-item]'),dialog=qs('#gallery-lightbox');

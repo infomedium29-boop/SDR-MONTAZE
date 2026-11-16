@@ -1,4 +1,4 @@
-/* SDR MONTAŽE — Medium29 / Client-First inspired semantic component system
+/* SDR MONTAŽE — Medium29 / semantic component system
    Prefixes: .container (layout), .section (layout), .u-* (utility), named blocks/components.
    Built as a native static HTML/CSS/JS website for Cloudflare Pages. */
 :root{--ink:#202725;--ink-soft:#303a36;--paper:#f7f6f2;--cream:#efeee8;--white:#fff;--line:#deded6;--muted:#777c75;--bronze:#ac8d65;--bronze-dark:#8a6a42;--bronze-light:#d7c5a9;--radius:12px;--container:1240px;--gutter:clamp(22px,5vw,64px);--ease:cubic-bezier(.25,.8,.25,1);--shadow:0 18px 44px rgba(16,26,22,.12);font-family:Inter,"Aptos",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;font-synthesis:none;scroll-behavior:smooth}
@@ -72,3 +72,80 @@ html.intro-pending .intro__micro {animation:introMicro .5s 1.3s forwards}
 
 @media(max-width:760px){.map-privacy{height:350px}}
 @media(max-width:560px){.map-privacy{height:330px}}
+
+
+/* MEDIUM29 / UREDNIČKA REVIZIJA — 16.11.2026
+   Smiren, fotografski vizualni identitet, bez dekorativnih AI uzoraka i ponavljajućih animacija.
+*/
+:root{--bronze:#a88860;--bronze-dark:#886d4a;--shadow:0 10px 28px rgba(20,30,26,.08)}
+/* Precizna tipografija, bez agresivnog razmaka u slovima i UI ukrasa. */
+h1,h2,h3{letter-spacing:-.036em}
+.eyebrow{letter-spacing:.105em;font-size:.76rem;font-weight:650;gap:0}
+.eyebrow::before{display:none!important;content:none!important}
+.hero__eyebrow{letter-spacing:.115em;font-weight:630;color:rgba(255,255,255,.9)}
+.hero__eyebrow span{display:none}
+.brand__rule,.hero__scroll,.hero__side,.photo-index,.service-card__num,.circle-arrow,.split-layout__micro,.process-item__line{display:none!important}
+/* Buttons keep a quiet accent; the gradient and hover jump were unnecessary. */
+.btn{gap:12px;border-radius:5px;transition:background .2s ease,border-color .2s ease,color .2s ease;transform:none!important}
+.btn:hover{transform:none!important}
+.btn--gold{background:#aa8b65;border:1px solid #aa8b65;box-shadow:none}
+.btn--gold:hover{background:#8f714d;border-color:#8f714d;box-shadow:none}
+.btn--glass{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(15,25,23,.38)}
+.btn--glass:hover{background:rgba(15,25,23,.55)}
+.btn--text-dark{border-bottom:1px solid #b6b1a5;gap:8px}
+.header-cta{border-radius:5px;background:#aa8b65;transition:background .2s}
+.header-cta:hover{background:#92734d}
+/* Calm navigation: no travelling gold underline, no fake glass glow. */
+.site-header__inner{background:rgba(24,32,30,.97);box-shadow:0 8px 23px rgba(0,0,0,.14);backdrop-filter:none;-webkit-backdrop-filter:none;border-color:rgba(255,255,255,.10)}
+.site-header.is-scrolled .site-header__inner{box-shadow:0 7px 19px rgba(0,0,0,.13)}
+.nav__link::after{content:none;display:none}
+.nav__link.is-current{color:white;font-weight:700}
+.nav__submenu{transition:opacity .18s ease,visibility .18s ease;transform:none!important}
+/* Intro has one job: introduce the name before the site. No ornamental stroke, subtitles or background zoom. */
+.intro{transition:opacity .46s ease,visibility .46s ease}
+.intro__visual{transform:none!important;transition:none!important;opacity:.32}
+.intro__shade{background:rgba(10,19,17,.47)}
+.intro__wordmark{clip-path:none!important;opacity:0;transform:translateY(10px);letter-spacing:-.06em;font-size:clamp(2.7rem,6.5vw,6.5rem);animation:none!important}
+.intro.is-active .intro__wordmark,html.intro-pending .intro__wordmark{animation:sdrWordmark .7s .13s ease-out both!important}
+@keyframes sdrWordmark{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.intro__underline,.intro__micro{display:none!important}
+.intro__skip{text-transform:none;letter-spacing:.015em;font-size:.85rem;bottom:28px;padding:12px 6px}
+/* Hero photography remains prominent and stationary. */
+.hero__image img{animation:none!important;transform:none!important}
+.hero__content{padding-top:128px;padding-bottom:125px}
+.hero h1{max-width:1000px;font-weight:650;letter-spacing:-.055em;text-shadow:0 2px 12px rgba(0,0,0,.1)}
+.hero__veil{background:linear-gradient(180deg,rgba(14,23,20,.35),rgba(14,23,20,.55))}
+/* Photos & cards: no numbered tags, floating offsets or zoom tricks. */
+.split-layout__media::before{content:none!important;display:none!important}
+.service-card{transition:border-color .2s ease,box-shadow .2s ease;transform:none!important}
+.service-card:hover{transform:none!important;box-shadow:0 7px 25px rgba(20,30,26,.07);border-color:#c8c6bc}
+.service-card__media img,.gallery-tile img,.related-card img{transition:none!important;transform:none!important}
+.service-card:hover img,.gallery-tile:hover img,.related-card:hover img{transform:none!important}
+.service-card__copy{min-height:unset;align-items:flex-start;padding:27px 25px 30px}
+.service-card__copy p{line-height:1.67}
+.gallery-grid--preview .gallery-tile:nth-child(2){transform:none!important}
+.gallery-tile:after{background:linear-gradient(transparent 65%,rgba(14,24,20,.68))}
+.gallery-tile__info{bottom:18px;left:19px;right:19px}
+.gallery-tile__info>span:last-child:empty{display:none}
+.process-item{padding-right:25px}
+.process-item>span{font-size:clamp(2.2rem,3.7vw,3.4rem);font-weight:540;color:#9e896c;letter-spacing:-.06em;margin-bottom:14px}
+.process-item h3{margin-bottom:7px}
+.process-item p{line-height:1.65}
+/* One distinct CTA per page, no repeated hero photograph. */
+.cta-band{background:#28322d;min-height:260px}
+.cta-band__picture,.cta-band__overlay{display:none!important}
+.cta-band__inner{padding-top:65px;padding-bottom:65px;gap:35px}
+.cta-band h2{font-size:clamp(2rem,3.6vw,3.7rem);max-width:790px;margin:0 0 14px}
+.cta-band p{max-width:600px}
+/* A truthful map placeholder: graphic street patterns imply a map that is not there. */
+.map-privacy{background:#e8e7e0;border-radius:5px}
+.map-privacy::before{content:none!important;display:none!important}
+.map-privacy__placeholder{background:none}
+.map-privacy__pin{border:0;background:none;width:auto;height:auto;border-radius:0;color:#8a6f4f;font-size:1.8rem}
+.map-privacy__location{font-size:1.7rem}
+/* No page section should be hidden until scroll JavaScript has run. */
+.reveal,.js-enabled .reveal{opacity:1!important;transform:none!important;transition:none!important}
+@media(max-width:920px){.nav__submenu{transition:none}.nav__link.is-current{font-weight:700}}
+@media(max-width:760px){.cta-band{min-height:unset}.cta-band__inner{padding-top:60px;padding-bottom:60px}.service-card__copy{min-height:unset}}
+@media(max-width:560px){.hero__content{padding-top:140px;padding-bottom:120px}.hero h1{font-size:clamp(2.75rem,10.5vw,4.3rem)}.cta-band h2{font-size:2.35rem}.process-item>span{font-size:2.6rem}.service-card__copy{padding:23px 22px 26px}.site-header__inner{box-shadow:0 5px 20px rgba(0,0,0,.12)}.intro__wordmark{font-size:clamp(2.55rem,9.8vw,4.15rem)}}
+@media(prefers-reduced-motion:reduce){.intro__wordmark,html.intro-pending .intro__wordmark,.intro.is-active .intro__wordmark{opacity:1;transform:none;animation:none!important}}

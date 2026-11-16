@@ -7,13 +7,13 @@ Kompletan statički projekt u HTML-u, CSS-u i JavaScriptu, bez WordPressa ili bu
 ## Što je napravljeno
 
 - **12 HTML stranica**: početna, usluge, ugradnja prozora, ugradnja vrata, sjenila i rolete, galerija, o nama, česta pitanja, kontakt, privatnost, kolačići i uvjeti korištenja, plus zasebna 404 stranica.
-- Animirani intro pri prvom ulasku u sesiji, profesionalna velika hero fotografija, lebdeća navigacija, odvojeni mobilni izbornik, mobile sticky kontakt traka.
+- Nenametljiv animirani intro pri prvom ulasku u sesiji, velika hero fotografija, lebdeća navigacija, mobilni izbornik i sticky kontakt traka.
 - AVIF + WebP lokalno optimizirane slike, galerija s filtriranjem i lightbox prikazom.
 - Kontakt forma s validacijom i honeypotom; opcionalna integracija Web3Forms.
 - Funkcionalna cookie privola i izmjena postavki, bez učitavanja analitike u demo verziji.
 - Responsive dizajn, osnovni SEO metapodaci, Open Graph, JSON-LD za organizaciju, struktura za sitemap, favicon, 404, robots.txt, sigurnosna HTTP zaglavlja.
 - Lokacijska Google karta otvara se tek na izričit klik posjetitelja radi zaštite privatnosti.
-- Čista komponentna struktura inspirirana Client-First načelima.
+- Organizacija komponenti inspirirana Client-First načelima. Nova revizija uklanja ponavljajuće dekoracije, uzastopne animacije i generičke elemente; detalji su u `DIZAJNERSKA_REVIZIJA.md`.
 
 ## Važno: prije javne objave potrebno je potvrditi s vlasnikom
 
@@ -29,7 +29,7 @@ Kompletan statički projekt u HTML-u, CSS-u i JavaScriptu, bez WordPressa ili bu
 
 ## Cloudflare Pages – demo deployment
 
-1. Raspakirajte ZIP i koristite **sadržaj mape `sdr_montaze_site`** kao root projekta. Ako radite GitHub deployment, u repository root prenesite sve stavke, uključujući `index.html`, `assets/`, `_redirects` i `_headers`.
+1. Raspakirajte ZIP: sve datoteke weba nalaze se u **korijenu arhive**, bez dodatne nadmape. Ako radite GitHub deployment, u repository root prenesite sve stavke, uključujući `index.html`, `assets/`, `_redirects` i `_headers`.
 2. Za **Cloudflare Pages Direct Upload** učitajte ZIP koji sadrži datoteke stranice u korijenu, a ne ZIP s dodatnom nadmapom. ZIP koji ste dobili već je složen na taj način.
 3. U Cloudflare Pages: framework **None**, build command prazno, output directory `/` (ili root projekta).
 4. Otvorite početnu, usluge, galeriju i kontakt na desktopu i mobitelu te provjerite prikaz.
