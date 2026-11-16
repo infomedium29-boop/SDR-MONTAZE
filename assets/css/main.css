@@ -358,3 +358,6 @@ html{scrollbar-gutter:stable}
 @media(max-width:760px){.map-live{height:350px}}
 @media(max-width:560px){.map-live{height:330px}.map-live__link{padding:12px}.map-live__cta{padding:11px 13px;font-size:.81rem}}
 @media(prefers-reduced-motion:reduce){.map-live__cta{transition:none}}
+
+/* SDR desktop-only: clearer architectural photography in subpage hero banners. */
+@media (min-width: 921px){.page-hero__overlay{background:linear-gradient(180deg,rgba(20,33,27,.23),rgba(15,25,21,.73))}}
