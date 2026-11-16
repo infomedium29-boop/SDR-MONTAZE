@@ -149,3 +149,37 @@ h1,h2,h3{letter-spacing:-.036em}
 @media(max-width:760px){.cta-band{min-height:unset}.cta-band__inner{padding-top:60px;padding-bottom:60px}.service-card__copy{min-height:unset}}
 @media(max-width:560px){.hero__content{padding-top:140px;padding-bottom:120px}.hero h1{font-size:clamp(2.75rem,10.5vw,4.3rem)}.cta-band h2{font-size:2.35rem}.process-item>span{font-size:2.6rem}.service-card__copy{padding:23px 22px 26px}.site-header__inner{box-shadow:0 5px 20px rgba(0,0,0,.12)}.intro__wordmark{font-size:clamp(2.55rem,9.8vw,4.15rem)}}
 @media(prefers-reduced-motion:reduce){.intro__wordmark,html.intro-pending .intro__wordmark,.intro.is-active .intro__wordmark{opacity:1;transform:none;animation:none!important}}
+
+
+/* MOBILNI HERO — CTA gumbi moraju ostati iznad obavijesti o kolačićima i donje kontakt trake. */
+@media(max-width:760px){
+.cookie-banner{padding:15px 16px;gap:12px}
+.cookie-banner__copy strong{font-size:.9rem}
+.cookie-banner__copy p{font-size:.76rem;margin-top:4px}
+.cookie-banner__buttons .btn{min-height:44px}
+.cookie-banner__buttons .btn:nth-child(3){min-height:33px;font-size:.78rem}
+body.cookie-prompt .hero__content{padding-top:112px;padding-bottom:clamp(240px,34vh,320px)}
+}
+@media(max-width:560px){
+body.cookie-prompt .hero__content{padding-top:106px;padding-bottom:clamp(235px,33vh,310px)}
+body.cookie-prompt .hero__content>p{margin-bottom:22px}
+}
+/* Dok je privola na ekranu, ona ima prednost pred donjom kontakt trakom. */
+@media(max-width:760px){
+body.cookie-prompt .mobile-actions{display:none}
+body.cookie-prompt .cookie-banner{bottom:calc(12px + env(safe-area-inset-bottom))}
+}
+/* Niski ekrani: kompaktnija privola, gumbi u jednom redu. */
+@media(max-width:760px) and (max-height:780px){
+.cookie-banner{padding:13px 14px;gap:10px}
+.cookie-banner__copy p{font-size:.73rem;line-height:1.5}
+.cookie-banner__buttons{grid-template-columns:1fr 1fr auto;gap:6px}
+.cookie-banner__buttons .btn{min-height:42px;font-size:.73rem}
+.cookie-banner__buttons .btn:nth-child(3){grid-column:auto;min-height:42px;padding-inline:11px;font-size:.73rem}
+body.cookie-prompt .hero__content{padding-top:100px;padding-bottom:clamp(185px,27vh,250px)}
+}
+@media(max-width:760px) and (max-height:700px){
+body.cookie-prompt .hero__content{padding-top:100px;padding-bottom:clamp(200px,31vh,235px)}
+body.cookie-prompt .hero__eyebrow{margin-bottom:19px}
+body.cookie-prompt .hero__content>p{margin-bottom:15px}
+}

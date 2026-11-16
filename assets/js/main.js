@@ -144,11 +144,13 @@
   const banner=qs('[data-cookie-banner]'),cookieModal=qs('[data-cookie-modal]');
   const cookieKey='sdr-cookie-choice-v1';
   const old=safeStorage.get(cookieKey);
-  if(banner&&!old)banner.hidden=false;
+  // The body flag lets the mobile layout keep the hero buttons clear of the consent prompt.
+  if(banner&&!old){banner.hidden=false;document.body.classList.add('cookie-prompt')}
   const storeChoice=analytics=>{
     safeStorage.set(cookieKey,JSON.stringify({necessary:true,analytics:!!analytics,updated:new Date().toISOString()}));
     banner.hidden=true;cookieModal.hidden=true;
-    // Note: analytics intentionally not installed in demo. Production consent-loader goes here.
+    document.body.classList.remove('cookie-prompt');
+    // Analytics are not installed yet. The consent-aware loader goes here.
   };
   qs('[data-cookie-accept]')?.addEventListener('click',()=>storeChoice(true));
   qs('[data-cookie-reject]')?.addEventListener('click',()=>storeChoice(false));
