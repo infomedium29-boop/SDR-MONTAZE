@@ -183,3 +183,49 @@ body.cookie-prompt .hero__content{padding-top:100px;padding-bottom:clamp(200px,3
 body.cookie-prompt .hero__eyebrow{margin-bottom:19px}
 body.cookie-prompt .hero__content>p{margin-bottom:15px}
 }
+
+
+/* SDR MONTAŽE / INTRO VARIJANTA — klizna staklena stijena */
+html.intro-pending:not(.intro-opening) [data-header],
+html.intro-pending:not(.intro-opening) .hero__content,
+html.intro-pending:not(.intro-opening) .hero__scroll{opacity:0;transform:translateY(18px)}
+[data-header],.hero__content,.hero__scroll{transition:opacity .55s ease,transform .75s cubic-bezier(.22,.61,.36,1)}
+.intro{background:#111917;transition:opacity .42s ease,visibility .42s ease}
+.intro__visual{opacity:.24;filter:saturate(.92)}
+.intro__shade{background:linear-gradient(180deg,rgba(8,14,13,.34),rgba(8,14,13,.58))}
+.intro__doors{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr;z-index:1;pointer-events:none}
+.intro__panel{position:relative;overflow:hidden;background:linear-gradient(180deg,rgba(33,41,39,.58),rgba(24,30,28,.72));backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);border-block:1px solid rgba(255,255,255,.12);box-shadow:inset 0 0 0 1px rgba(255,255,255,.04);transition:transform .86s cubic-bezier(.22,.61,.36,1),opacity .38s ease}
+.intro__panel--left{border-right:2px solid rgba(255,255,255,.16)}
+.intro__panel--right{border-left:2px solid rgba(0,0,0,.22)}
+.intro__panel::before{content:"";position:absolute;inset:0;background:linear-gradient(105deg,rgba(255,255,255,.12),rgba(255,255,255,0) 36%,rgba(255,255,255,.06) 60%,rgba(255,255,255,0) 76%);opacity:.7}
+.intro__panel::after{content:"";position:absolute;top:50%;width:3px;height:clamp(74px,14vh,128px);border-radius:999px;background:linear-gradient(180deg,rgba(214,194,162,.82),rgba(172,141,101,.92));box-shadow:0 0 0 1px rgba(255,255,255,.08),0 8px 20px rgba(0,0,0,.16);transform:translateY(-50%)}
+.intro__panel--left::after{right:clamp(20px,2.5vw,34px)}
+.intro__panel--right::after{left:clamp(20px,2.5vw,34px)}
+.intro__center{z-index:2}
+.intro__wordmark{opacity:0;transform:translateY(10px);transition:opacity .32s ease,transform .6s ease,color .32s ease;text-shadow:0 6px 24px rgba(0,0,0,.22)}
+.intro.is-active .intro__wordmark,html.intro-pending .intro__wordmark{animation:sdrWordmark .72s .1s ease-out both!important}
+.intro.is-opening .intro__wordmark{animation:none!important;opacity:0;transform:translateY(-8px) scale(.98)}
+.intro__skip{z-index:3}
+.intro.is-opening .intro__panel--left{transform:translateX(-102%)}
+.intro.is-opening .intro__panel--right{transform:translateX(102%)}
+.intro.is-opening .intro__panel{opacity:.94}
+@media(max-width:760px){
+  html.intro-pending:not(.intro-opening) .hero__content{transform:translateY(14px)}
+  .intro__panel::after{height:clamp(64px,11vh,96px)}
+}
+@media(max-width:560px){
+  .intro__visual{opacity:.21}
+  .intro__shade{background:linear-gradient(180deg,rgba(8,14,13,.28),rgba(8,14,13,.62))}
+  .intro__panel{backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px)}
+  .intro__panel--left::after{right:16px}
+  .intro__panel--right::after{left:16px}
+  .intro__skip{bottom:22px}
+}
+@media(prefers-reduced-motion:reduce){
+  html.intro-pending:not(.intro-opening) [data-header],
+  html.intro-pending:not(.intro-opening) .hero__content,
+  html.intro-pending:not(.intro-opening) .hero__scroll{opacity:1;transform:none}
+  .intro__panel{transition:none}
+  .intro.is-opening .intro__panel--left,
+  .intro.is-opening .intro__panel--right{transform:none}
+}

@@ -7,7 +7,7 @@
     set(key,val,session=false){try{(session?sessionStorage:localStorage).setItem(key,val)}catch{}}
   };
 
-  // INTRO — first view of the session, skips on reduced motion and inner pages.
+  // INTRO — first view of the session, styled as a calm sliding glass wall.
   const intro = qs('#site-intro');
   if (intro && document.documentElement.classList.contains('intro-pending')) {
     intro.classList.add('is-active');
@@ -16,19 +16,27 @@
     let timer;
     const exit = () => {
       clearTimeout(timer);
-      if(!intro.classList.contains('is-active'))return;
-      intro.classList.add('is-exiting');
-      intro.classList.remove('is-active');
-      document.documentElement.classList.remove('intro-pending');
+      if (!intro.classList.contains('is-active') || intro.classList.contains('is-opening')) return;
+      const root = document.documentElement;
+      intro.classList.add('is-opening');
+      root.classList.add('intro-opening');
       intro.setAttribute('aria-hidden','true');
-      document.body.style.overflow='';
       safeStorage.set('sdr-intro-seen','1',true);
-      setTimeout(() => intro.remove(), 550);
+      window.setTimeout(() => {
+        intro.classList.add('is-exiting');
+        intro.classList.remove('is-active');
+        root.classList.remove('intro-pending','intro-opening');
+        document.body.style.overflow='';
+      }, 760);
+      window.setTimeout(() => intro.remove(), 1180);
     };
-    timer = setTimeout(exit, 1850);
-    qs('[data-intro-skip]',intro)?.addEventListener('click',exit);
-    intro.addEventListener('keydown', e => {if(e.key==='Escape'||e.key==='Enter')exit()});
-  }else{document.documentElement.classList.remove('intro-pending');intro?.remove()}
+    timer = window.setTimeout(exit, 1650);
+    qs('[data-intro-skip]', intro)?.addEventListener('click', exit);
+    intro.addEventListener('keydown', e => { if (e.key === 'Escape' || e.key === 'Enter') exit(); });
+  } else {
+    document.documentElement.classList.remove('intro-pending','intro-opening');
+    intro?.remove();
+  }
 
   // FLOATING HEADER / MENU / DROPDOWN.
   const header=qs('[data-header]'),toggle=qs('[data-menu-toggle]'),nav=qs('.nav'),scrim=qs('[data-menu-scrim]');
