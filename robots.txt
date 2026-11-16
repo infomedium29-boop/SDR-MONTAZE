@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /
+# DEMO: enable indexing and generate sitemap after client approval.
