@@ -127,8 +127,6 @@
     if(!formStatus)return;
     formStatus.hidden=false;formStatus.className='form-status '+(error?'is-error':'is-success');formStatus.textContent=message;
   };
-  const mailtoNote=qs('[data-mailto-note]');
-  if(mailtoNote && window.SDR_CONFIG?.web3formsAccessKey) mailtoNote.hidden=true;
   form?.addEventListener('submit',async e=>{
     e.preventDefault();
     if(!form.checkValidity()){form.reportValidity();formMessage('Provjerite obavezna polja.',true);return}
@@ -156,17 +154,6 @@
     }
   });
 
-
-  // A third-party map is loaded ONLY after the visitor explicitly requests it.
-  const loadMap = qs('[data-load-map]');
-  loadMap?.addEventListener('click', () => {
-    const holder=qs('[data-map-container]'),frame=qs('[data-map-frame]',holder);
-    if(!frame)return;
-    frame.src='https://www.google.com/maps?q=%C5%BDminj%2C%20Istra%2C%20Hrvatska&output=embed';
-    frame.hidden=false;
-    const placeholder=qs('[data-map-placeholder]',holder);
-    if(placeholder)placeholder.hidden=true;
-  });
 
   // GDPR CONSUMER CHOICE: no external analytics loaded without consent.
   const banner=qs('[data-cookie-banner]'),cookieModal=qs('[data-cookie-modal]');

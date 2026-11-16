@@ -12,7 +12,7 @@ Kompletan statički projekt u HTML-u, CSS-u i JavaScriptu, bez WordPressa ili bu
 - Kontakt forma s validacijom i honeypotom; opcionalna integracija Web3Forms.
 - Funkcionalna cookie privola i izmjena postavki, bez učitavanja analitike u demo verziji.
 - Responsive dizajn, osnovni SEO metapodaci, Open Graph, JSON-LD za organizaciju, struktura za sitemap, favicon, 404, robots.txt, sigurnosna HTTP zaglavlja.
-- Lokacijska Google karta otvara se tek na izričit klik posjetitelja radi zaštite privatnosti.
+- Kontakt sada prikazuje stvarnu Google Maps kartu registrirane adrese Trg maršala Tita 3, 52341 Žminj. Klik na kartu otvara Google Maps u novoj kartici. Prije javne objave treba potvrditi adresu i uskladiti vanjsku kartu s GDPR privolom.
 - Organizacija komponenti inspirirana Client-First načelima. Nova revizija uklanja ponavljajuće dekoracije, uzastopne animacije i generičke elemente; detalji su u `DIZAJNERSKA_REVIZIJA.md`.
 
 ## Važno: prije javne objave potrebno je potvrditi s vlasnikom
