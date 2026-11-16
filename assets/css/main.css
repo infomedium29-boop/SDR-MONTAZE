@@ -361,3 +361,9 @@ html{scrollbar-gutter:stable}
 
 /* SDR desktop-only: clearer architectural photography in subpage hero banners. */
 @media (min-width: 921px){.page-hero__overlay{background:linear-gradient(180deg,rgba(20,33,27,.23),rgba(15,25,21,.73))}}
+
+/* Desktop hero clarity: stronger source photos, reduced dark overlay on photo-right. */
+@media(min-width:921px){
+.page-hero__image img{filter:none!important;image-rendering:auto;object-fit:cover}
+.page-hero__overlay{background:linear-gradient(90deg,rgba(13,23,20,.58) 0%,rgba(13,23,20,.32) 43%,rgba(13,23,20,.10) 100%),linear-gradient(180deg,rgba(13,23,20,.05) 0%,rgba(13,23,20,.24) 100%)}
+}
