@@ -34,14 +34,18 @@
       safeStorage.set('sdr-intro-seen','1',true);
       // Let the doors separate before bringing in the navigation and hero copy.
       later(() => root.classList.add('intro-revealing'), 480);
-      // Leave the doors time to clear the viewport before fading the overlay.
+      // Fade the already-opened wall away without changing the page width.
+      // Keep scrolling locked until the overlay is completely removed; the
+      // scrollbar gutter is reserved in CSS throughout the transition.
       later(() => {
         intro.classList.add('is-exiting');
         intro.classList.remove('is-active');
         root.classList.remove('intro-pending','intro-opening','intro-revealing');
-        document.body.style.overflow='';
       }, 1450);
-      later(() => intro.remove(), 1910);
+      later(() => {
+        intro.remove();
+        document.body.style.overflow='';
+      }, 1910);
     };
     later(open, 1670);
     // The explicit skip action should never make visitors sit through the reveal.

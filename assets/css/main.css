@@ -291,3 +291,11 @@ html.intro-revealing .hero__content {
   }
   .intro__panel {will-change:auto;transition:none}
 }
+
+
+/* SDR MONTAŽE / završno uklanjanje mikrotrzaja pri izlasku iz introa */
+/* Reserve the scrollbar track throughout the animation so the centered hero and
+   floating navigation never move sideways when scrolling is unlocked. */
+html{scrollbar-gutter:stable}
+/* Keep the fixed intro isolated from page layout and avoid a paint flash at teardown. */
+.intro{contain:layout paint}
