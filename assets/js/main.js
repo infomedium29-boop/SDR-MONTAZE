@@ -11,7 +11,7 @@
   // INTRO — first view of the session, skips on reduced motion and inner pages.
   const intro = qs('#site-intro');
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (intro && !safeStorage.get('sdr-intro-seen',true) && !reduced) {
+  if (intro && document.documentElement.classList.contains('intro-pending')) {
     intro.classList.add('is-active');
     intro.setAttribute('aria-hidden','false');
     document.body.style.overflow='hidden';
@@ -21,6 +21,7 @@
       if(!intro.classList.contains('is-active'))return;
       intro.classList.add('is-exiting');
       intro.classList.remove('is-active');
+      document.documentElement.classList.remove('intro-pending');
       intro.setAttribute('aria-hidden','true');
       document.body.style.overflow='';
       safeStorage.set('sdr-intro-seen','1',true);
@@ -29,7 +30,7 @@
     timer = setTimeout(exit, 2360);
     qs('[data-intro-skip]',intro)?.addEventListener('click',exit);
     intro.addEventListener('keydown', e => {if(e.key==='Escape'||e.key==='Enter')exit()});
-  }else{intro?.remove()}
+  }else{document.documentElement.classList.remove('intro-pending');intro?.remove()}
 
   // FLOATING HEADER / MENU / DROPDOWN.
   const header=qs('[data-header]'),toggle=qs('[data-menu-toggle]'),nav=qs('.nav'),scrim=qs('[data-menu-scrim]');
