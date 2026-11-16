@@ -110,9 +110,11 @@
     if(!formStatus)return;
     formStatus.hidden=false;formStatus.className='form-status '+(error?'is-error':'is-success');formStatus.textContent=message;
   };
+  const mailtoNote=qs('[data-mailto-note]');
+  if(mailtoNote && window.SDR_CONFIG?.web3formsAccessKey) mailtoNote.hidden=true;
   form?.addEventListener('submit',async e=>{
     e.preventDefault();
-    if(!form.checkValidity()){form.reportValidity();formMessage('Provjerite obavezna polja i pokušajte ponovno.',true);return}
+    if(!form.checkValidity()){form.reportValidity();formMessage('Provjerite obavezna polja.',true);return}
     if(form.elements.website.value)return;
     const fields=new FormData(form),cfg=window.SDR_CONFIG||{},submit=qs('[data-submit-btn]',form);
     if(cfg.web3formsAccessKey){
@@ -126,13 +128,13 @@
         const response=await fetch('https://api.web3forms.com/submit',{method:'POST',body:payload});
         const data=await response.json();
         if(!response.ok||!data.success)throw Error(data.message||'Neuspjelo slanje');
-        formMessage('Hvala vam! Vaš upit je uspješno poslan.');form.reset();
-      }catch(err){formMessage('Slanje nije uspjelo. Molimo, javite nam se telefonom ili e-mailom.',true)}
+        formMessage('Upit je poslan. Hvala na javljanju.');form.reset();
+      }catch(err){formMessage('Poruka nije poslana. Nazovite nas ili pošaljite e-mail.',true)}
       finally{submit.disabled=false;submit.removeAttribute('aria-busy')}
     }else{
       const lines=[`Ime: ${fields.get('name')}`,`Telefon: ${fields.get('phone')}`,`E-mail: ${fields.get('email')}`,`Usluga: ${fields.get('service')}`,`Lokacija: ${fields.get('location')}`,'',`${fields.get('message')}`];
       const url=`mailto:${String(cfg.contactEmail||'').replace(/[^\w.+@-]/g,'')}?subject=${encodeURIComponent('Upit za montažu – SDR Montaže')}&body=${encodeURIComponent(lines.join('\n'))}`;
-      formMessage('Otvara se nacrt e-mail poruke. Provjerite i pošaljite poruku iz svojeg e-mail programa.');
+      formMessage('Otvara se e-mail poruka. Provjerite je i pošaljite iz svojeg e-mail programa.');
       window.location.href=url;
     }
   });
