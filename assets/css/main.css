@@ -229,3 +229,65 @@ html.intro-pending:not(.intro-opening) .hero__scroll{opacity:0;transform:transla
   .intro.is-opening .intro__panel--left,
   .intro.is-opening .intro__panel--right{transform:none}
 }
+
+
+/* SDR MONTAŽE / mirniji prijelaz sa staklene stijene na naslovnicu.
+   Uključuje postupni dolazak navigacije i sadržaja, bez naglog uklanjanja panela. */
+html.intro-pending:not(.intro-revealing) [data-header],
+html.intro-pending:not(.intro-revealing) .hero__content,
+html.intro-pending:not(.intro-revealing) .hero__scroll {
+  opacity:0;
+  transform:translateY(14px);
+}
+/* Staged reveal: header arrives first, then the central hero content. */
+[data-header] {
+  transition:top .25s ease,opacity .72s ease,transform .9s cubic-bezier(.22,.61,.36,1);
+}
+.hero__content {
+  transition:opacity .95s ease,transform 1.05s cubic-bezier(.22,.61,.36,1);
+}
+html.intro-revealing .hero__content {
+  transition-delay:.17s;
+}
+.intro {
+  transition:opacity .4s ease,visibility .4s ease,background-color .98s ease;
+}
+.intro__visual {
+  transition:opacity 1.02s ease!important;
+}
+.intro__shade {
+  transition:opacity .95s ease;
+}
+.intro__panel {
+  transition:transform 1.32s cubic-bezier(.65,0,.19,1),opacity .42s ease;
+  will-change:transform;
+}
+.intro.is-active.is-opening,.intro.is-opening {
+  background-color:transparent;
+}
+.intro.is-opening .intro__visual,
+.intro.is-opening .intro__shade {
+  opacity:0;
+}
+.intro__center {
+  transition:opacity .42s ease,transform .58s cubic-bezier(.22,.61,.36,1);
+}
+.intro.is-opening .intro__center {
+  opacity:0;
+  transform:translateY(-10px);
+}
+.intro.is-opening .intro__skip {
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .3s ease;
+}
+/* Skip every animation for people who request reduced motion. */
+@media (prefers-reduced-motion:reduce) {
+  html.intro-pending:not(.intro-revealing) [data-header],
+  html.intro-pending:not(.intro-revealing) .hero__content,
+  html.intro-pending:not(.intro-revealing) .hero__scroll {
+    opacity:1;
+    transform:none;
+  }
+  .intro__panel {will-change:auto;transition:none}
+}

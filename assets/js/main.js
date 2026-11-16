@@ -7,34 +7,50 @@
     set(key,val,session=false){try{(session?sessionStorage:localStorage).setItem(key,val)}catch{}}
   };
 
-  // INTRO — first view of the session, styled as a calm sliding glass wall.
+  // INTRO — slow, staged sliding-glass reveal; appears once per session.
   const intro = qs('#site-intro');
   if (intro && document.documentElement.classList.contains('intro-pending')) {
+    const root = document.documentElement;
     intro.classList.add('is-active');
     intro.setAttribute('aria-hidden','false');
     document.body.style.overflow='hidden';
-    let timer;
-    const exit = () => {
-      clearTimeout(timer);
-      if (!intro.classList.contains('is-active') || intro.classList.contains('is-opening')) return;
-      const root = document.documentElement;
+    let opened = false;
+    const timers = [];
+    const later = (fn, ms) => timers.push(window.setTimeout(fn, ms));
+    const finish = () => {
+      timers.forEach(window.clearTimeout);
+      root.classList.remove('intro-pending','intro-opening','intro-revealing');
+      document.body.style.overflow='';
+      intro.setAttribute('aria-hidden','true');
+      intro.remove();
+      safeStorage.set('sdr-intro-seen','1',true);
+    };
+    const open = () => {
+      if (opened) return;
+      opened = true;
       intro.classList.add('is-opening');
       root.classList.add('intro-opening');
       intro.setAttribute('aria-hidden','true');
       safeStorage.set('sdr-intro-seen','1',true);
-      window.setTimeout(() => {
+      // Let the doors separate before bringing in the navigation and hero copy.
+      later(() => root.classList.add('intro-revealing'), 480);
+      // Leave the doors time to clear the viewport before fading the overlay.
+      later(() => {
         intro.classList.add('is-exiting');
         intro.classList.remove('is-active');
-        root.classList.remove('intro-pending','intro-opening');
+        root.classList.remove('intro-pending','intro-opening','intro-revealing');
         document.body.style.overflow='';
-      }, 760);
-      window.setTimeout(() => intro.remove(), 1180);
+      }, 1450);
+      later(() => intro.remove(), 1910);
     };
-    timer = window.setTimeout(exit, 1650);
-    qs('[data-intro-skip]', intro)?.addEventListener('click', exit);
-    intro.addEventListener('keydown', e => { if (e.key === 'Escape' || e.key === 'Enter') exit(); });
+    later(open, 1670);
+    // The explicit skip action should never make visitors sit through the reveal.
+    qs('[data-intro-skip]', intro)?.addEventListener('click', finish);
+    intro.addEventListener('keydown', e => {
+      if (e.key === 'Escape' || e.key === 'Enter') finish();
+    });
   } else {
-    document.documentElement.classList.remove('intro-pending','intro-opening');
+    document.documentElement.classList.remove('intro-pending','intro-opening','intro-revealing');
     intro?.remove();
   }
 
